@@ -1,0 +1,107 @@
+---
+title:  |
+    | Why the Jungler Role is Important in League of Legends
+author: |
+    | Data, Research & Testing By: Eun Tag Cheon
+    | Documentation By: Michell Mika
+output:
+  pdf_document:
+    number_sections: yes
+documentclass: article
+classoption: a4paper
+fontsize: 11pt
+header-includes:
+- \renewcommand{\thesection}{Q\arabic{section}}
+- \renewcommand{\thesubsection}{Part \alph{subsection}.}
+- \usepackage{fullpage}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+defaultW <- getOption("warn") 
+
+options(warn = -1) 
+
+options(warn = defaultW)
+```
+
+The tests below use data taken from professional matches that happened during the League of Legends 2015 World Championship. The goal is to show the importance of the role of Jungler in this game and to show that the role has a great influence on each match's end results.
+
+For this research, we decided to look at professional games played during the League of Legends 2015 World Championship. We decided to pick Benji, a professional League of Legends player, and look at his matches for patterns or irregularities. We looked at 16 different matches to get a more reliable and consistent set of data. In all 16 matches, Benji was playing against other professional players that were equally as skilled at this game.
+
+The Jungler role is one of the most important roles in this game because it is one of the two roles whose job is to focus on assisting the rest of the team, the other role being the Support role. When compared to other team based multiplayer games, support roles aren't as heavily relied on as in League of Legends. In other games, you could have no one play a support role and yet still have a chance of winning the game. In League of Legends however, if either of the support roles aren't doing their part, the match will result in a definite loss.
+
+We picked Benji out of all the other professional players because he is one of the world's top League of Legends players and Jungler is his main role in all the matches he plays. Because he's a professional player, he's a consistent player and he plays each match to the best of his abilities, meaning he doesn't get distracted by small things like a phone call for example. This means the data extracted from his matches are reliable and if he lost a match, there has to be something important that caused it.
+\newpage
+
+```{r message=FALSE}
+library(readxl)
+league_of_legend_positioin_jungle <- 
+  read_excel("league of legend -positioin jungle.xlsx")
+league_of_legend_positioin_jungle
+```
+
+The table above shows all the data used for the tests done throughout this document. The table shows 16 different matches. For each match Benji played the role of Jungler and his data was compared to the player that played the role of Jungler on the opposite team. Benji performed exceptionally well in 15 matches, which resulted in his team winning each of the 15 matches. The one match where Benji did poorly, his team lost.
+
+-“Player” shows the names of the players who played the role of Jungler for each match.
+
+-“Kills” shows the amount of times that the player killed enemy players for each match.
+
+-“Deaths” shows the amount of times that the player died to enemy players for each match.
+
+-“Assists” shows the amount of times that the player helped a teammate kill an enemy player for each match.
+
+-“KDA” is calculated with (kills + assists)/deaths. The number reflects the players overall performance, the higher the number is, the better that player did.
+
+-“Result” shows which player won and which player lost each match.
+\newpage
+```{r message=FALSE}
+library(tidyverse)
+ggplot(data=league_of_legend_positioin_jungle)+geom_boxplot(mapping=aes(x=Result,y=Kills))
+```
+
+The graph above shows that each match's result is heavily affected by the amount of kills that the Jungler has in that match. As you can see, the more kills that the Jungler gets, the more likely it is that that specific match will end in a victory. This means teams that have Junglers who get kills, consistently and frequently, are most likely going to win.
+
+During these matches, the enemy team was also played by professional players. Despite the enemy team doing well, since Benji played the role of Jungler better than his opponent, they always achieved victory.
+\newpage
+```{r}
+ggplot(data=league_of_legend_positioin_jungle)+geom_boxplot(mapping=aes(x=Result,y=Death))
+```
+The graph above shows that each match's result is also affected by the amount of deaths the Jungler has. This is because every time the Jungler dies, they level up slower, and help level up their   opponents instead. This leads to the enemy team getting the upper hand and eventually a loss for the friendly team. This means teams that have Junglers who die, consistently and frequently, are most likely going to lose.
+
+During these matches, the other roles were also played by professional players. Despite them doing well, if their Jungler isn't doing well, the match will most likely end in a loss.
+\newpage
+```{r}
+ggplot(data=league_of_legend_positioin_jungle)+geom_boxplot(mapping=aes(x=Result,y=Assist))
+```
+
+The graph above shows that each match's result is heavily affected by the amount of assists that the Jungler has in that match. As you can see, the more assists that the Jungler gets, the more likely it is that that specific match will end in a victory. This means teams that have Junglers who assist their teammates, consistently and frequently, are most likely going to win.
+
+The number of assists also show that Benji, as the Jungler, made sure that his teammates always had the upper hand. By getting kills as a team, Benji and his teammates consistently kept leveling up, making the match more challenging for their opponents.
+\newpage
+
+```{r}
+ggplot(data=league_of_legend_positioin_jungle)+geom_boxplot(mapping=aes(x=Result,y=KDA))
+```
+
+Each player's KDA at the end of the match shows how well they performed overall in that match, and a player's overall KDA (calculated from every match they have ever played) shows if they are a good or bad player at League of Legends. The higher the number, the better the player is at this game. 
+
+The graph above shows that teams with Junglers who have high KDA are more likely to achieve victory when compared to teams that have a Jungler with low KDA.
+
+
+Conclusion
+
+The role of Jungler is really important to the game of League of Legends, all the tests above prove that the Junglers performance has a great influence on the outcome of each match. This is more apparent when professional games are taken into consideration. Because in professional matches, everyone is equally skilled, the slightest difference in performance impacts the whole team. This can be seen in the 16 matches we covered. Benji did well in 15 of the matches, which resulted in a win every time, however, the one match he didn't do well in resulted in a loss, even though the rest of the team was very capable.
+
+
+These tests were done to build a foundation which will help us look at the Jungler role even further. The next part will focus on how bullying can have an impact on the Junglers performance and how the Jungler gets bullied more often than the other roles.
+
+
+
+\newpage
+\appendix
+# Appendix: R Environment
+```{r r_environ}
+sessionInfo()
+```
